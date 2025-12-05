@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexandria Oliver | Theatre Artist & Scholar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #1a1a1a;
+            --accent: #d4af37;
+            --accent-soft: #b89968;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a0a0a0;
+            --border: #333;
+            --highlight: #ff6b6b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Grid */
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            animation: gridPulse 20s ease-in-out infinite;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem 4rem;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            position: relative;
+            z-index: 10;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 700;
+            line-height: 0.95;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title .highlight {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            animation: fadeIn 1.5s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-description {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+            animation: fadeInUp 1.5s ease-out 0.5s both;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 4rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        .scroll-indicator span {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+        }
+
+        .scroll-line {
+            width: 2px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+
+        /* Section Styles */
+        section {
+            position: relative;
+            padding: 8rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 4rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        /* Work Grid */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .work-card {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .work-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .work-card:hover::before {
+            opacity: 1;
+        }
+
+        .work-category {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .work-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .work-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .work-details {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .work-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .work-detail::before {
+            content: '→';
+            color: var(--accent);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .about-text {
+            font-size: 1.3rem;
+            line-height: 1.9;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .about-text .emphasis {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .skills-list {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border);
+            padding: 3rem;
+        }
+
+        .skill-category {
+            margin-bottom: 2.5rem;
+        }
+
+        .skill-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-category h3 {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skill-category li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .blog-post {
+            background: var(--secondary-bg);
+            border-left: 4px solid var(--accent);
+            padding: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .blog-post:hover {
+            background: rgba(26, 26, 26, 0.8);
+            border-left-color: var(--highlight);
+            transform: translateX(10px);
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+        }
+
+        .blog-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .blog-excerpt {
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-link {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .blog-link:hover {
+            gap: 1rem;
+        }
+
+        .blog-link::after {
+            content: '→';
+        }
+
+        /* Research Section */
+        .research-intro {
+            font-size: 1.4rem;
+            line-height: 1.9;
+            max-width: 900px;
+            margin-bottom: 4rem;
+            color: var(--text-secondary);
+        }
+
+        .research-highlight {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(255, 107, 107, 0.1));
+            border: 1px solid var(--accent);
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .research-highlight h3 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .research-highlight p {
+            color: var(--text-secondary);
+            line-height: 1.9;
+            font-size: 1.1rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-method {
+            text-align: center;
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .contact-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            border-top: 1px solid var(--border);
+            padding: 3rem 4rem;
+            text-align: center;
+            margin-top: 8rem;
+        }
+
+        footer p {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero {
+                padding: 6rem 2rem;
+            }
+
+            section {
+                padding: 5rem 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-methods {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--accent);
+            color: var(--primary-bg);
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-background"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <div class="nav-logo">AO</div>
+            <ul class="nav-links">
+                <li><a href="#work">Work</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#blog">Writing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-subtitle">Theatre Artist & Scholar</div>
+            <h1 class="hero-title">
+                Alexandria<br>
+                <span class="highlight">Oliver</span>
+            </h1>
+            <p class="hero-description">
+                Director, designer, dramaturg, and educator exploring the intersections of experimental theatre practice and avant-garde performance theory. Artistic Director of Roaming Gnome Theatre Company.
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work">
+        <h2 class="section-title">Selected Work</h2>
+        
+        <div class="work-grid">
+            <div class="work-card">
+                <div class="work-category">Directing</div>
+                <h3 class="work-title">Radium Girls</h3>
+                <p class="work-description">
+                    A powerful exploration of the 1920s radium dial painters' fight for justice. Directed for Roaming Gnome Theatre Company with extensive period research and historically accurate design elements.
+                </p>
+                <div class="work-details">
+                    <span class="work-detail">2024</span>
+                    <span class="work-detail">RGT</span>
+                    <span class="work-detail">Director</span>
+                </div>
+            </div>
+
+            <div class="work-card">
+                <div class="work-category">Directing</div>
+                <h3 class="work-title">The Wizard of Oz</h3>
+                <p class="work-description">
+                    A reimagined production incorporating experimental staging techniques and ensemble-driven storytelling for youth performers.
+                </p>
+                <div class="work-details">
+                    <span class="work-detail">2024</span>
+                    <span class="work-detail">RGT</span>
+                    <span class="work-detail">Director</span>
+                </div>
+            </div>
+
+            <div class="work-card">
+                <div class="work-category">Costume Design</div>
+                <h3 class="work-title">The Mystery of Edwin Drood</h3>
+                <p class="work-description">
+                    Victorian-era costume design and construction showcasing detailed period research and craft techniques. Collaboration with Jodi Karjala at Trinity University.
+                </p>
+                <div class="work-details">
+                    <span class="work-detail">2019</span>
+                    <span class="work-detail">Trinity University</span>
+                    <span class="work-detail">Assistant Designer</span>
+                </div>
+            </div>
+
+            <div class="work-card">
+                <div class="work-category">Teaching</div>
+                <h3 class="work-title">Performance-Based Theatre Classes</h3>
+                <p class="work-description">
+                    Teaching youth theatre workshops for the City of Aurora, incorporating Viewpoints methodology and experimental performance techniques adapted for young performers.
+                </p>
+                <div class="work-details">
+                    <span class="work-detail">Ongoing</span>
+                    <span class="work-detail">City of Aurora</span>
+                </div>
+            </div>
+
+            <div class="work-card">
+                <div class="work-category">Sound Design</div>
+                <h3 class="work-title">Various Productions</h3>
+                <p class="work-description">
+                    Sonic landscapes and soundscapes designed to enhance theatrical narrative and create immersive auditory experiences for audiences.
+                </p>
+                <div class="work-details">
+                    <span class="work-detail">2022-2024</span>
+                    <span class="work-detail">Multiple Productions</span>
+                </div>
+            </div>
+
+            <div class="work-card">
+                <div class="work-category">Summer Programs</div>
+                <h3 class="work-title">Themed Theatre Camps</h3>
+                <p class="work-description">
+                    Developed and led innovative themed camps including K-Pop Demon Hunters, Taylor Swift, Disney Sidekicks, and Hadestown, creating original performance experiences.
+                </p>
+                <div class="work-details">
+                    <span class="work-detail">2024-2026</span>
+                    <span class="work-detail">RGT</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About</h2>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    <span class="emphasis">I am an artist-scholar</span> working at the intersection of experimental theatre practice and performance theory. As co-founder and Artistic Director of Roaming Gnome Theatre Company, I've directed over 24 productions since 2022, developing a unique approach that brings avant-garde techniques to youth ensemble work.
+                </p>
+                <p>
+                    My practice encompasses directing, costume design, sound design, and dramaturgy, always informed by theoretical inquiry. I hold a dual BA in Theatre and Political Science from Trinity University, where I was deeply influenced by Berlin's experimental theatre tradition through intensive study of German theatre movements.
+                </p>
+                <p>
+                    <span class="emphasis">My scholarly work explores</span> how avant-garde theatre performs death as a survival mechanism rather than actually dying—challenging declarations of obsolescence and examining cycles of regeneration in experimental performance from Ubu Roi to Hamletmachine.
+                </p>
+            </div>
+
+            <div class="skills-list">
+                <div class="skill-category">
+                    <h3>Directing</h3>
+                    <ul>
+                        <li>Viewpoints Methodology</li>
+                        <li>Ensemble Building</li>
+                        <li>Experimental Staging</li>
+                        <li>Youth Theatre Direction</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Design</h3>
+                    <ul>
+                        <li>Costume Design & Construction</li>
+                        <li>Sound Design</li>
+                        <li>Period Research</li>
+                        <li>Visual Storytelling</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Scholarship</h3>
+                    <ul>
+                        <li>Avant-Garde Theory</li>
+                        <li>Performance Studies</li>
+                        <li>Dramaturgical Research</li>
+                        <li>German Theatre History</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Teaching</h3>
+                    <ul>
+                        <li>Youth Theatre Pedagogy</li>
+                        <li>Performance Techniques</li>
+                        <li>Summer Camp Development</li>
+                        <li>Workshop Facilitation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research">
+        <h2 class="section-title">Research</h2>
+        
+        <div class="research-intro">
+            My research investigates how avant-garde theatre movements perform their own death as a strategy of survival, challenging scholarly narratives that declare experimental performance obsolete. Through close analysis of key texts and theorists—from Jarry's Ubu Roi to Müller's Hamletmachine—I explore how the avant-garde employs cycles of negation and regeneration.
+        </div>
+
+        <div class="research-highlight">
+            <h3>On Avant-Garde Cycles & Aufhebung</h3>
+            <p>
+                Drawing on Hegelian philosophy and performance theorists like Peter Bürger, Hal Foster, and Peggy Phelan, my work examines how the avant-garde's "death" is not a conclusion but a dialectical transformation. Each declaration of the avant-garde's end paradoxically ensures its continuation, as new movements absorb, negate, and transcend their predecessors while retaining essential critical impulses.
+            </p>
+        </div>
+
+        <div class="research-highlight">
+            <h3>From Theory to Practice</h3>
+            <p>
+                This theoretical framework informs my directorial practice with Roaming Gnome Theatre Company, where I adapt experimental techniques—meta-theatrical devices, audience disruption, non-linear narratives—for youth ensembles. My work demonstrates how avant-garde strategies remain vital tools for contemporary performance, not historical artifacts.
+            </p>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog">
+        <h2 class="section-title">Recent Writing</h2>
+        
+        <div class="blog-grid">
+            <article class="blog-post">
+                <div class="blog-meta">
+                    <span>November 2024</span>
+                    <span>Theory</span>
+                </div>
+                <h3 class="blog-title">Death as Performance: The Avant-Garde's Strategic Obsolescence</h3>
+                <p class="blog-excerpt">
+                    How do we understand the avant-garde's repeated declarations of its own death? This essay explores the performative nature of obsolescence in experimental theatre, examining how movements from Dadaism to postdramatic theatre have used "death" as a regenerative force...
+                </p>
+                <a href="#" class="blog-link">Read More</a>
+            </article>
+
+            <article class="blog-post">
+                <div class="blog-meta">
+                    <span>October 2024</span>
+                    <span>Practice</span>
+                </div>
+                <h3 class="blog-title">Directing Radium Girls: Historical Research Meets Teenage Urgency</h3>
+                <p class="blog-excerpt">
+                    What does it mean to help teenage actors embody the high-stakes reality of 1920s labor activism? Reflections on creating historically accurate period details while maintaining the raw emotional truth necessary for young performers to access these profound stories...
+                </p>
+                <a href="#" class="blog-link">Read More</a>
+            </article>
+
+            <article class="blog-post">
+                <div class="blog-meta">
+                    <span>September 2024</span>
+                    <span>Pedagogy</span>
+                </div>
+                <h3 class="blog-title">Viewpoints with Youth: Adapting Experimental Techniques</h3>
+                <p class="blog-excerpt">
+                    How can we introduce sophisticated movement and composition techniques to young performers without losing the playfulness that makes theatre magical? Exploring the intersection of Anne Bogart's Viewpoints methodology and youth theatre education...
+                </p>
+                <a href="#" class="blog-link">Read More</a>
+            </article>
+
+            <article class="blog-post">
+                <div class="blog-meta">
+                    <span>August 2024</span>
+                    <span>Theory</span>
+                </div>
+                <h3 class="blog-title">Müller's Hamletmachine & the Postdramatic Legacy</h3>
+                <p class="blog-excerpt">
+                    Heiner Müller's fragmented, visceral text stands as a pivotal moment in theatre history. But how do we read Hamletmachine not as the death of dramatic theatre, but as its transformation? An examination of postdramatic performance through the lens of dialectical regeneration...
+                </p>
+                <a href="#" class="blog-link">Read More</a>
+            </article>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Get in Touch</h2>
+        
+        <div class="contact-content">
+            <p style="font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 3rem;">
+                Interested in collaboration, guest lectures, or production inquiries? I'd love to hear from you.
+            </p>
+
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <div class="contact-icon">✉</div>
+                    <div class="contact-label">Email</div>
+                    <a href="mailto:contact@alexandriaoliver.com" class="contact-link">contact@alexandriaoliver.com</a>
+                </div>
+
+                <div class="contact-method">
+                    <div class="contact-icon">🎭</div>
+                    <div class="contact-label">Theatre Company</div>
+                    <a href="#" class="contact-link">Roaming Gnome Theatre</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Alexandria Oliver. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe work cards and blog posts
+        document.querySelectorAll('.work-card, .blog-post').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
